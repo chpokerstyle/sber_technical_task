@@ -16,15 +16,16 @@ public class MenageServiceImpl implements MenageService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.REPEATABLE_READ)
-    public Person accrualPoints(BonusDTO bonusDTO) {
+    public Person accrualPoints(BonusDTO bonusDTO) throws Exception {
         Person person = personRepo.getReferenceById(bonusDTO.getId());
+        if (!person.getGoodMode()) throw new Exception("У Вас недостаточно прав для добавления бонусов. ");
         long points = person.getPoints();
         person.setPoints(points + bonusDTO.getPoints());
         return personRepo.save(person);
     }
 
     @Override
-//    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
     public BonusDTO getPoints(long personId) {
         System.out.println(personRepo.findAll());
         Person person = personRepo.getReferenceById(personId);

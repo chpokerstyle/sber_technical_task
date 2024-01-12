@@ -2,7 +2,9 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +14,6 @@ import lombok.experimental.Accessors;
 @Entity
 @Table(name = "PERSONS", schema = "PUBLIC")
 @Data
-@ToString
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,10 +23,10 @@ public class Person {
     @Column(name = "ID")
     private Long id;
 
-    @NotEmpty
+    @NotNull
     private String firstName;
 
-    @NotEmpty
+    @NotNull
     private String lastName;
 
     @Min(value = 0, message = "Балланс не может быть ниже ноля. ")

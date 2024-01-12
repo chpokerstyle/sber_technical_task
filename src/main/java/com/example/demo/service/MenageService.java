@@ -5,7 +5,7 @@ import com.example.demo.rest.dto.BonusDTO;
 
 public interface MenageService {
 
-    Person accrualPoints(BonusDTO bonusDTO);
+    Person accrualPoints(BonusDTO bonusDTO) throws Exception;
 
     BonusDTO getPoints(long personId);
 
